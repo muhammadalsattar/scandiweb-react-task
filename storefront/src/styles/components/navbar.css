@@ -1,0 +1,22 @@
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 2em;
+}
+nav .category {
+    border: none;
+    background: none;
+    text-transform: uppercase;
+    font-size: 1.3em;
+    padding: .5em;
+}
+nav .category.active {
+    border-bottom: 2px solid #5ECE7B;
+    color: #5ECE7B;
+}
+nav .dropdowns {
+    display: flex;
+    flex-direction: row;
+}
