@@ -6,17 +6,30 @@ import {setDefaultCategory} from "../actions/categories";
 import {setDefaultCurrency} from "../actions/currencies";
 
 class Navbar extends React.Component {
+    componentDidMount() {
+        document.addEventListener("click", (e) => {
+            if (!e.target.parentNode.classList.contains("cart-img")) {
+                document.querySelector(".cart-overlay").setAttribute("hidden", "true");
+                document.querySelector(".page-body").classList.remove("faded")
+            }
+            if (!e.target.classList.contains("currency-icon")) {
+                document.querySelector(".currency-dropdown").setAttribute("hidden", "true");
+                document.querySelector(".currency-drop-icon").style.transform = "rotate(0deg)";
+            }
+        })
+    }
     setDefaultCurrency = (e) => {
         e.preventDefault();
         const currency = this.props.currencies.find(currency => currency.symbol === e.target.value);
         this.props.setDefaultCurrency(currency);
     }
-    toggleCart = () => {
-        document.querySelector(".cart-overlay").toggleAttribute("hidden")
-        document.querySelector(".page-body").classList.toggle("faded")
+    openCart = () => {
+        console.log("open cart");
+        document.querySelector(".cart-overlay").removeAttribute("hidden");
+        document.querySelector(".page-body").classList.add("faded");
     }
-    toggleCurrencyDropdown = () => {
-        document.querySelector(".currency-dropdown").toggleAttribute("hidden");
+    toggleCurrencyDropdown = (e) => {
+        document.querySelector(".currency-dropdown").removeAttribute("hidden");
         document.querySelector(".currency-drop-icon").style.transform = "rotate(180deg)";
     }
     render() {
@@ -38,7 +51,7 @@ class Navbar extends React.Component {
                         </ul>
                     </div>
                     <div className="cart-div">
-                        <button className="cart-img" onClick={this.toggleCart}><img src={process.env.PUBLIC_URL+'/cart.png'} alt='cart-img'></img></button>
+                        <button className="cart-img" onClick={this.openCart}><img src={process.env.PUBLIC_URL+'/cart.png'} alt='cart-img'></img></button>
                         <button className="cart-count">{this.props.cart.length}</button>
                         <CartOverlay/>
                     </div>

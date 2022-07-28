@@ -26,7 +26,7 @@ class Products extends React.Component {
       behavior: 'smooth'
     });
     document.querySelector(".cart-overlay").removeAttribute("hidden");
-    document.querySelector(".page-body").classList.toggle("faded")
+    document.querySelector(".page-body").classList.add("faded")
   }
 
   render() {

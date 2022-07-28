@@ -5,7 +5,7 @@ import {pickPrice, calculateTotal} from "../utils/utils";
 import { removeFromCart, addToCart } from "../actions/cart";
 
 
-class Cart extends React.Component {
+export class Cart extends React.Component {
     updateCart = (product) => {
         this.props.updateCart(product);
     }
@@ -43,7 +43,7 @@ class Cart extends React.Component {
                 <Navbar />
                 <div className="cart page-body">
                     <h1 className="cart-heading">Cart</h1>
-                    <div className="cart-items">{this.props.cart.map((product, index) =>(
+                    <div className="cart-items">{this.props.cart && this.props.cart.map((product, index) =>(
                         <div className="cart-item" key={index}>
                             <div className="item-details">
                                 <h2 className="brand">{product.brand}</h2>

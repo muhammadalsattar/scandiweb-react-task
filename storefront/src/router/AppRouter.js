@@ -7,20 +7,6 @@ import Cart from "../components/Cart";
 
 const history = createBrowserHistory({window});
 class AppRouter extends React.Component {
-    componentDidMount() {
-        const currencyIcon = document.querySelector('.navbar .currency-icon');
-        const cartIcon = document.querySelector('.navbar .cart-img img');
-        document.addEventListener('click', (e) => {
-            if (e.target !== currencyIcon) {
-                document.querySelector(".currency-dropdown").setAttribute("hidden", "true");
-                document.querySelector(".currency-drop-icon").style.transform = "rotate(0deg)";
-            }
-            if (e.target !== cartIcon) {
-                document.querySelector(".cart-overlay").setAttribute("hidden", "true");
-                document.querySelector(".page-body").classList.remove("faded")
-            }
-        })
-    }
     render() {
         return(
             <HistoryRouter history={history}>
