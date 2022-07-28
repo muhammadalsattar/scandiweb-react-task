@@ -1,58 +1,109 @@
 import React from "react";
 import { connect } from "react-redux";
+import Navbar from "./Navbar";
+import {addToCart} from "../actions/cart";
 
 
 class Product extends React.Component {
+
+  changeFocuesdImage = (e) => {
+    const src = e.target.src;
+    document.querySelector(".image-focused img").src = src;
+  }
+
+  changeActiveAttr = (e) => {
+    e.preventDefault();
+    document.querySelector(`.${e.target.parentNode.className}#selected`).removeAttribute("id");
+    e.target.parentNode.setAttribute("id", "selected");
+  }
+
+  addToCart = (product) => {
+    let selectedAttr = [];
+    document.querySelectorAll(".product-attribute-values div#selected").forEach((node)=>{
+      selectedAttr.push({
+        name: node.className,
+        value: node.children[0].id
+      })
+    })
+    const newProduct = {...product, selectedAttr, quantity: 1}
+    this.props.addToCart(newProduct)
+
+    document.querySelector(".cart-overlay").removeAttribute("hidden");
+    document.querySelector(".page-body").classList.toggle("faded")
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+
   render() {
     return (
-      <div className="product">
-        <div className="product-gallery">
-          {
-            this.props.product?.gallery.map((image, index) => {
-              return (
-                <img key={index} src={image} alt={this.props.product.name} style={{width: 50}}/>
-              )
-            })
-          }
-        </div>
-        <div className="product-info">
-          <h2>{this.props.product?.brand}</h2>
-          <h3>{this.props.product?.name}</h3>
-        </div>
-        <div className="product-attributes">
-          {
-            this.props.product?.attributes.map((attribute, index) => {
-              return(
-                <div className="product-attribute" key={index}>
-                  <h4>{attribute.name}</h4>
-                    {
-                      attribute.items.map((item, index) => {
-                        return (<button key={item.id}>{item.value}</button>)
-                      })
-                    }
+      <div className="product-page">
+        <Navbar />
+        <div className="product page-body">
+          <div className="product-gallery">
+            <div className="product-gallery-images">
+              {this.props.product?.gallery.map((image) => (<img key={image} src={image} onClick={this.changeFocuesdImage} alt={this.props.product.name}/>))}
+            </div>
+            <div className="image-focused"><img src={this.props.product?.gallery[0]} alt={this.props.product?.name}></img></div>
+          </div>
+          <div className="product-info">
+            <h1 className="product-brand">{this.props.product?.brand}</h1>
+            <h1 className="product-name">{this.props.product?.name}</h1>
+            <div className="product-attributes">
+            {
+            this.props.product?.attributes.map((attribute) =>
+              (
+              <div className="product-attribute" key={attribute.name}>
+                <h4>{attribute.name}:</h4>
+                <div className="product-attribute-values">
+                {
+                  attribute.items.map((item, index) =>
+                    attribute.name === "Color"?
+                      index === 0?
+                        <div key={item.id} id="selected" className={attribute.id.replaceAll(' ', '-')}><button id={item.value} onClick={this.changeActiveAttr} style={{backgroundColor: item.value}}/></div>:
+                        <div key={item.id} className={attribute.id.replaceAll(' ', '-')}><button id={item.value} onClick={this.changeActiveAttr} style={{backgroundColor: item.value}}/></div>
+                      :
+                      index === 0?
+                      <div key={item.id} id="selected" className={attribute.id.replaceAll(' ', '-')}><button id={item.value} onClick={this.changeActiveAttr}>{item.value}</button></div>: 
+                      <div key={item.id} className={attribute.id.replaceAll(' ', '-')}><button id={item.value} onClick={this.changeActiveAttr}>{item.value}</button></div>
+                  )
+                }
                 </div>
-            )})
-          }
+              </div>
+              )
+            )}
+            </div>
+            <div className="product-price">
+              <h4>Price:</h4>
+              <h4 className="price">
+              {this.props.product?.prices.find((price) => price.currency.symbol === this.props.defaultCurrency.symbol)?.currency.symbol}
+              {this.props.product?.prices.find((price) => price.currency.symbol === this.props.defaultCurrency.symbol)?.amount}
+              </h4>
+            </div>
+            <button className="cart" onClick={(e)=>{this.addToCart(this.props.product)}}>Add to Cart</button>
+            <div className="product-description">
+              <p>{new DOMParser().parseFromString(this.props.product?.description, "text/html").body.textContent}</p>
+            </div>
+          </div>
         </div>
-        <div className="product-price">
-          <h4>Price:</h4>
-          {this.props.product?.prices.find((price) => price.currency.symbol === this.props.defaultCurrency.symbol)?.currency.symbol}
-          {this.props.product?.prices.find((price) => price.currency.symbol === this.props.defaultCurrency.symbol)?.amount}
-        </div>
-        <button>Add to Cart</button>
-        <div className="product-description">
-          <p>{new DOMParser().parseFromString(this.props.product?.description, "text/html").body.textContent}</p>
-        </div>
-      </div>
+    </div>
     );
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addToCart: product => dispatch(addToCart(product))
   }
 }
 
 const mapStateToProps = state => {
   return {
     product: state.products.products.find(product => product.id === new URLSearchParams(window.location.search).get("id")),
-    defaultCurrency: state.currencies.defaultCurrency
+    defaultCurrency: state.currencies.defaultCurrency,
+    cart: state.cart.cart
   }
 }
 
-export default connect(mapStateToProps)(Product);
+export default connect(mapStateToProps, mapDispatchToProps)(Product);

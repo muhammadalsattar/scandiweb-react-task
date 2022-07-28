@@ -1,17 +1,21 @@
 @import './components/navbar';
+@import './components/cart-overlay';
+@import './components/products';
+@import './components/product';
+@import './components/cart';
+
+* {
+  font-family: 'Raleway', sans-serif !important;
+}
 
 body {
   margin: 0;
-  font-family: 'Raleway', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-.selected {
-  border: 1px solid #000;
-  padding: 1px;
+.faded {
+  background-color: rgba(57, 55, 72, 0.22);
+  opacity: .5;
+  filter: blur(.5px);
 }

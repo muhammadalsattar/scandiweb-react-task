@@ -12,32 +12,34 @@ class Navbar extends React.Component {
         this.props.setDefaultCurrency(currency);
     }
     toggleCart = () => {
-        document.querySelector(".cart-overlay").toggleAttribute("hidden");
+        document.querySelector(".cart-overlay").toggleAttribute("hidden")
+        document.querySelector(".page-body").classList.toggle("faded")
+    }
+    toggleCurrencyDropdown = () => {
+        document.querySelector(".currency-dropdown").toggleAttribute("hidden");
+        document.querySelector(".currency-drop-icon").style.transform = "rotate(180deg)";
     }
     render() {
         return (
             <nav className="navbar">
                 <div className="categories">
                     {this.props.categories.map(category => {
-                        return(
-                            category.name === this.props.defaultCategory.name ? <button key={category.name} className="category active">{category.name}</button> : <button className="category" key={category.name} onClick={()=>{this.props.setDefaultCategory(category)}}>{category.name}</button>
-                        )
-                    }
-                    )}
+                        return(category.name === this.props.defaultCategory.name ? <button key={category.name} className="category active">{category.name}</button> : <button className="category" key={category.name} onClick={()=>{this.props.setDefaultCategory(category)}}>{category.name}</button>)
+                    })}
                 </div>
                 <div className="brand-logo">
-                    <Link to="/"><h3>logo</h3></Link>
+                    <Link to="/"><img src={process.env.PUBLIC_URL +'/logo.png'} alt="logo-icon"></img></Link>
                 </div>
                 <div className="dropdowns">
-                    <div className="currency">
-                        <select onChange={this.setDefaultCurrency}>
-                            {this.props.currencies.map(currency => {
-                                return <option key={currency.symbol} value={currency.symbol}>{currency.symbol} {currency.label}</option>
-                            })}
-                        </select>
+                    <div className="currency-div">
+                        <button onClick={this.toggleCurrencyDropdown} className="currency-icon">{this.props.defaultCurrency.symbol}<span className="currency-drop-icon">&#8743;</span></button>
+                        <ul className="currency-dropdown" hidden>
+                            {this.props.currencies.map(currency => <li key={currency.symbol}><button value={currency.symbol} onClick={this.setDefaultCurrency}>{currency.symbol} {currency.label}</button></li>)}
+                        </ul>
                     </div>
-                    <div className="cart">
-                        <button onClick={this.toggleCart}>Cart</button>
+                    <div className="cart-div">
+                        <button className="cart-img" onClick={this.toggleCart}><img src={process.env.PUBLIC_URL+'/cart.png'} alt='cart-img'></img></button>
+                        <button className="cart-count">{this.props.cart.length}</button>
                         <CartOverlay/>
                     </div>
                 </div>

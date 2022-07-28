@@ -11,11 +11,4 @@ const removeFromCart = (id) => {
     }
 }
 
-const updateCartItem = (product) => {
-    return {
-        type: 'UPDATE_CART_ITEM',
-        product
-    }
-}
-
-export { addToCart, removeFromCart, updateCartItem };
+export { addToCart, removeFromCart };

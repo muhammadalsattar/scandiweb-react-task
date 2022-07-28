@@ -1,14 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { addToCart, updateCartItem } from "../actions/cart";
+import Navbar from "./Navbar";
+import { addToCart } from "../actions/cart";
 import { setActiveProduct } from "../actions/products";
-import pickPrice from "../utils/pickPrice";
+import {pickPrice} from "../utils/utils";
 
 class Products extends React.Component {
 
   updateCart = e => {
     e.preventDefault();
+
     const product = this.props.products.find(product => product.id === e.target.id);
     const selectedAttr = product.attributes.map(attribute => {
       return {
@@ -17,37 +19,42 @@ class Products extends React.Component {
       };
     });
     const newProduct = {...product, selectedAttr, quantity: 1};
-    if(this.props.cart.find(cartProduct => cartProduct.id === newProduct.id)) {
-      this.props.updateCartItem(newProduct);
-    }
-    else {
-      this.props.addToCart(newProduct);
-    }
+    this.props.addToCart(newProduct);
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+    document.querySelector(".cart-overlay").removeAttribute("hidden");
+    document.querySelector(".page-body").classList.toggle("faded")
   }
 
   render() {
     return (
-      <div>
-        <h1>{this.props.defaultCategory}</h1>
-        <div className="products">
-          {this.props.products.map(product => {
-            return (
-                <div className="product" key={product.id}>
-                  <div className="product-image">
-                    <Link to={`/product?id=${product.id}`} ><img src={product.gallery[0]} alt={product.name} style={{width: 150}}></img></Link>
-                  </div>
-                  {product.inStock && <p>Available</p>}
-                  <div className="product-info">
-                    <h3>{product.name}</h3>
-                    {new DOMParser().parseFromString(product.description, "text/html").body.textContent}
-                    <p>{this.props.defaultCurrency.symbol} {pickPrice(product.prices, this.props.defaultCurrency)}</p>
-                  </div>
-                  <button id={product.id} onClick={this.updateCart}>Add to bag</button>
+      <div className="products-page">
+        <Navbar />
+        <div className="products page-body">
+          <h1 className="category-name">{this.props.defaultCategory}</h1>
+          <div className="products-list">
+            {this.props.products.map(product =>
+              (
+              <div className={"product-item " + product.inStock} key={product.id}>
+                {product.inStock && <h2 className="out-stock">out of stock</h2>}
+                <div className="product-image">
+                  <Link to={`/product?id=${product.id}`} ><img src={product.gallery[0]} alt={product.name}></img></Link>
                 </div>
-              );
-            })}
+                <div className="product-info">
+                  <p className="product-name">{product.name}</p>
+                  <p className="product-price">{this.props.defaultCurrency.symbol}{pickPrice(product.prices, this.props.defaultCurrency)}</p>
+                </div>
+                <button className="bag-button"><img id={product.id} onClick={this.updateCart} src={process.env.PUBLIC_URL+"/circle-icon.png"} alt="cart-circle"></img></button>
+              </div>
+              )
+            )}
+          </div>
         </div>
-      </div>);
+    </div>
+    );
   }
 }
 
@@ -58,9 +65,6 @@ const mapDispatchToProps = dispatch => {
     },
     setActiveProduct: productID => {
       dispatch(setActiveProduct(productID));
-    },
-    updateCartItem: (product) => {
-      dispatch(updateCartItem(product));
     }
   };
 };

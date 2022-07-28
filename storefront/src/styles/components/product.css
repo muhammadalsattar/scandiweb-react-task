@@ -1,0 +1,143 @@
+.product {
+    height: 100%;
+    padding: 4em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+/* Product gallery */
+.product .product-gallery {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 60%;
+}
+
+.product .product-gallery-images {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.product .product-gallery-images img {
+    width: 6em !important;
+    margin-bottom: .4em;
+}
+
+.product .product-gallery .image-focused {
+    width: 80%;
+    text-align: center;
+}
+
+.product .product-gallery .image-focused img {
+    width: 80% !important;
+}
+
+/* Product info */
+.product .product-info {
+    width: 40%;
+}
+.product .product-name {
+    font-weight: 200;
+}
+
+/* Product attributes */
+.product .product-attribute {
+    margin: 2em 0;
+}
+
+.product .product-attribute button {
+    cursor: pointer;
+}
+
+.product .product-attribute h4 {
+    margin: .3em;
+}
+.product .product-attribute-values {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.product .product-attribute-values .Color {
+    width: 1.5em;
+    height: 1.5em;
+    margin: 0 .3em;
+    padding: 1px;
+}
+
+.product .product-attribute-values .Color button {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.product .product-attribute-values .Color#selected {
+    border: 1px solid #5ECE7B;
+}
+
+.product .product-attribute-values div {
+    margin: 0 .2em;
+    padding: 1px;
+}
+
+.product .product-attribute-values div button{
+    color: #1D1F22;
+    background-color: #fff;
+    padding: .5em;
+    font-size: 1.1em;
+    border: 1px solid #1D1F22;
+}
+
+.product .product-attribute-values div#selected button{
+    color: #fff;
+    background-color: #1D1F22;
+    padding: .5em;
+    font-size: 1.1em;
+}
+
+.product .product-attribute-values div button {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border-radius: 0;
+}
+
+/* product price */
+.product .product-price {
+    margin: 1em 0;
+}
+
+.product .product-price h4 {
+    margin: .3em;
+}
+
+.product .product-price .price {
+    font-size: 1.25em;
+}
+
+/* add-to-cart button */
+.product button.cart {
+    margin: 1em 0;
+    background-color: #5ECE7B;
+    color: #fff;
+    font-size: 1.3em;
+    border: none;
+    padding: .5em;
+    width: 50%;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+/* product description */
+.product .product-description {
+    margin: 1em 0;
+    width: 50%;
+    font-weight: 400;
+    line-height: 1.4em;
+}
