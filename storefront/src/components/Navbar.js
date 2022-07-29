@@ -24,11 +24,10 @@ class Navbar extends React.Component {
         this.props.setDefaultCurrency(currency);
     }
     openCart = () => {
-        console.log("open cart");
         document.querySelector(".cart-overlay").removeAttribute("hidden");
         document.querySelector(".page-body").classList.add("faded");
     }
-    toggleCurrencyDropdown = (e) => {
+    toggleCurrencyDropdown = () => {
         document.querySelector(".currency-dropdown").removeAttribute("hidden");
         document.querySelector(".currency-drop-icon").style.transform = "rotate(180deg)";
     }

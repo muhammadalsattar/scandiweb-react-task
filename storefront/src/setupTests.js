@@ -904,44 +904,40 @@ const initialState = {
             "quantity": 1
         }
     ],
-    categories: {
-        categories: [
-            {
-                "name": "all"
-            },
-            {
-                "name": "clothes"
-            },
-            {
-                "name": "tech"
-            }
-        ]
-    },
-    currencies: {
-        currencies: [
-            {
-                "label": "USD",
-                "symbol": "$"
-            },
-            {
-                "label": "GBP",
-                "symbol": "£"
-            },
-            {
-                "label": "AUD",
-                "symbol": "A$"
-            },
-            {
-                "label": "JPY",
-                "symbol": "¥"
-            },
-            {
-                "label": "RUB",
-                "symbol": "₽"
-            }
-        ]
-    }
+    categories: [
+        {
+            "name": "all"
+        },
+        {
+            "name": "clothes"
+        },
+        {
+            "name": "tech"
+        }
+    ],
+    currencies: [
+        {
+            "label": "USD",
+            "symbol": "$"
+        },
+        {
+            "label": "GBP",
+            "symbol": "£"
+        },
+        {
+            "label": "AUD",
+            "symbol": "A$"
+        },
+        {
+            "label": "JPY",
+            "symbol": "¥"
+        },
+        {
+            "label": "RUB",
+            "symbol": "₽"
+        }
+    ]
 }
 const store = mockStore(initialState)
 
-export {store}
+export {store, initialState}
