@@ -464,6 +464,9 @@ exports[`Products renders correctly 1`] = `
         </div>
       </div>
     </div>
+    <div
+      class="load-more"
+    />
   </div>
 </div>
 `;

@@ -17,13 +17,11 @@ const loadProducts = (products, loadedProducts) => {
     let newProducts;
     if (products.length < loadedProducts + 5) {  
         newProducts = products.slice(loadedProducts, products.length);
-        console.log(newProducts);
         Store.dispatch(setLoadedProducts(products.length));
         return newProducts;
     }
     else {
         newProducts = products.slice(loadedProducts, loadedProducts + 5);
-        console.log(newProducts);
         Store.dispatch(setLoadedProducts(loadedProducts + 5));
         return newProducts;
     }

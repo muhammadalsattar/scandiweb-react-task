@@ -9,7 +9,7 @@ import { initialState } from "../../setupTests.js"
 test("Products renders correctly", () => {
     const { undefined, container } = render(
         <Provider store={Store}>
-        <Router><Products cart={initialState.cart} defaultCurrency={initialState.currencies[0]} products={initialState.products} defaultCategory={initialState.categories[0].name}/></Router>
+        <Router><Products cart={initialState.cart} allProducts={initialState.products} defaultCurrency={initialState.currencies[0]} products={initialState.products} defaultCategory={initialState.categories[0].name}/></Router>
         </Provider>
     );
     expect(container).toMatchSnapshot();
