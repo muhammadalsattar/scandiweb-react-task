@@ -8,7 +8,7 @@ import {setDefaultCurrency} from "../actions/currencies";
 export class Navbar extends React.Component {
     componentDidMount() {
         document.addEventListener("click", (e) => {
-            if (!e.target.parentNode.classList.contains("cart-img")) {
+            if (!e.target.parentNode?.classList.contains("cart-img")) {
                 document.querySelector(".cart-overlay").setAttribute("hidden", "true");
                 document.querySelector(".page-body").classList.remove("faded")
             }

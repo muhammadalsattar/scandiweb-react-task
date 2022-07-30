@@ -57,7 +57,9 @@ export class Products extends React.Component {
             )}
           </div>
         </div>
-        <button className="load-more" onClick={this.loadMore}>Load More</button>
+        <div className="load-more">
+          { this.props.allProducts.length > this.props.loadedProducts && <button onClick={this.loadMore}>Load More</button>}
+        </div>
     </div>
     );
   }

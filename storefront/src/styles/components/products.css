@@ -23,7 +23,7 @@
     padding: 1em;
     margin: .5em 1em;
     position: relative;
-    transition: .5s ease-in-out;
+    transition: all .5s ease-in-out;
 }
 
 .products .product-item.true {
@@ -89,6 +89,24 @@
     opacity: 1;
 }
 
+.products-page .load-more {
+    width: 90%;
+    text-align: center;
+    margin: 1em 0em 3em 0em;
+}
+
+.products-page .load-more button {
+    background: #5ECE7B;
+    color: #fff;
+    padding: .5em 1em;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: 200;
+    cursor: pointer;
+}
+
+/* Small screens */
 @media screen and (max-width: 768px) {
     .products .products-list{
         grid-template-columns: 1fr 1fr;
