@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { removeFromCart, addToCart } from "../actions/cart";
 import {pickPrice, calculateTotal} from "../utils/utils";
 
-class CartOverlay extends React.Component {
+export class CartOverlay extends React.Component {
     updateCart = (product) => {
         this.props.updateCart(product);
     }

@@ -3,11 +3,10 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Navbar from "./Navbar";
 import { addToCart } from "../actions/cart";
-import { setActiveProduct } from "../actions/products";
+import { setActiveProduct, setLoadedProducts } from "../actions/products";
 import {pickPrice} from "../utils/utils";
 
-class Products extends React.Component {
-
+export class Products extends React.Component {
   updateCart = e => {
     e.preventDefault();
 
@@ -29,6 +28,11 @@ class Products extends React.Component {
     document.querySelector(".page-body").classList.add("faded")
   }
 
+  loadMore = e => {
+    e.preventDefault();
+    this.props.setLoadedProducts(this.props.loadedProducts, this.props.allProducts.length);
+  }
+  
   render() {
     return (
       <div className="products-page">
@@ -53,6 +57,7 @@ class Products extends React.Component {
             )}
           </div>
         </div>
+        <button className="load-more" onClick={this.loadMore}>Load More</button>
     </div>
     );
   }
@@ -65,6 +70,13 @@ const mapDispatchToProps = dispatch => {
     },
     setActiveProduct: productID => {
       dispatch(setActiveProduct(productID));
+    },
+    setLoadedProducts: (loadedProducts, productsLength) => {
+      if(loadedProducts + 5 > productsLength) {
+        dispatch(setLoadedProducts(productsLength));
+      } else {
+        dispatch(setLoadedProducts(loadedProducts + 5));
+      }
     }
   };
 };
@@ -72,12 +84,14 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
   return {
     products: state.categories.defaultCategory.name === "all"?
-    state.products.products.map(product => {
+    state.products.products.slice(0, state.products.loadedProducts).map(product => {
       return product;
     }):
-    state.products.products.filter(product=>product.category === state.categories.defaultCategory.name).map(product => {
+    state.products.products.slice(0, state.products.loadedProducts).filter(product=>product.category === state.categories.defaultCategory.name).map(product => {
       return product;
     }),
+    allProducts: state.products.products,
+    loadedProducts: state.products.loadedProducts,
     defaultCategory: state.categories.defaultCategory.name,
     cart: state.cart.cart,
     defaultCurrency: state.currencies.defaultCurrency

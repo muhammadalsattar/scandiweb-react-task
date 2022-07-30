@@ -1,6 +1,7 @@
 const defaultState = {
     products: [],
     activeProduct: null,
+    loadedProducts: 5
 };
 
 const productsReducer = (state = defaultState, action) => {
@@ -14,6 +15,11 @@ const productsReducer = (state = defaultState, action) => {
             return {
                 ...state,
                 activeProduct: action.product
+            }
+        case 'SET_LOADED_PRODUCTS':
+            return {
+                ...state,
+                loadedProducts: action.loadedProducts
             }
         default:
             return state;

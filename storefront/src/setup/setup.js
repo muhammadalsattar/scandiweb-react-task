@@ -1,5 +1,5 @@
 import Store from "../store/Store";
-import { setProducts } from "../actions/products";
+import {  setProducts } from "../actions/products";
 import { setCategories } from "../actions/categories";
 import { setCurrencies } from "../actions/currencies";
 import { setDefaultCategory } from "../actions/categories";
@@ -52,6 +52,7 @@ const getProducts = () => {
         data => {
             const products = data.data.categories[0].products;
             Store.dispatch(setProducts(products));
+            return products;
         }
     )
 }
@@ -79,6 +80,7 @@ const getCategories = () => {
             const categories = data.data.categories;
             Store.dispatch(setCategories(categories));
             Store.dispatch(setDefaultCategory(categories[0]));
+            return categories;
         }
     )
 }
@@ -107,6 +109,7 @@ const getCurrencies = () => {
             const currencies = data.data.currencies;
             Store.dispatch(setCurrencies(currencies));
             Store.dispatch(setDefaultCurrency(currencies[0]));
+            return currencies;
         })
 }
 
@@ -114,6 +117,6 @@ const setup = async() => {
     getProducts();
     getCategories();
     getCurrencies();
-}
+};
 
-export default setup;
+export { setup as default ,getProducts, getCategories, getCurrencies };

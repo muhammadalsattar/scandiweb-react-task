@@ -5,7 +5,7 @@ import CartOverlay from "./CartOverlay";
 import {setDefaultCategory} from "../actions/categories";
 import {setDefaultCurrency} from "../actions/currencies";
 
-class Navbar extends React.Component {
+export class Navbar extends React.Component {
     componentDidMount() {
         document.addEventListener("click", (e) => {
             if (!e.target.parentNode.classList.contains("cart-img")) {

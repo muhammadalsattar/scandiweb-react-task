@@ -4,7 +4,7 @@ import Navbar from "./Navbar";
 import {addToCart} from "../actions/cart";
 
 
-class Product extends React.Component {
+export class Product extends React.Component {
 
   changeFocuesdImage = (e) => {
     const src = e.target.src;
