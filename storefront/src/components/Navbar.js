@@ -8,14 +8,19 @@ import {setDefaultCurrency} from "../actions/currencies";
 export class Navbar extends React.Component {
     componentDidMount() {
         document.addEventListener("click", (e) => {
-            if (!e.target.parentNode?.classList.contains("cart-img")) {
+            if(document.querySelector(".cart-overlay").contains(e.target)){
+                document.querySelector(".cart-overlay").removeAttribute("hidden");
+                document.querySelector(".page-body").classList.add("faded")
+            }
+            else if (!e.target.parentNode?.classList.contains("cart-img")) {
                 document.querySelector(".cart-overlay").setAttribute("hidden", "true");
                 document.querySelector(".page-body").classList.remove("faded")
             }
-            if (!e.target.classList.contains("currency-icon")) {
+            else if (!e.target.classList.contains("currency-icon")) {
                 document.querySelector(".currency-dropdown").setAttribute("hidden", "true");
                 document.querySelector(".currency-drop-icon").style.transform = "rotate(0deg)";
             }
+
         })
     }
     setDefaultCurrency = (e) => {
