@@ -4,10 +4,10 @@ const addToCart = (product) => {
         product
     }
 }
-const removeFromCart = (id) => {
+const removeFromCart = (product) => {
     return {
         type: 'REMOVE_FROM_CART',
-        id
+        product
     }
 }
 

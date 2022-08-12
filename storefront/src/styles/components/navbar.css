@@ -7,6 +7,10 @@ nav {
 }
 
 /* categories */
+nav .category a {
+    text-decoration: none;
+    color: inherit
+}
 nav .category {
     border: none;
     background: none;

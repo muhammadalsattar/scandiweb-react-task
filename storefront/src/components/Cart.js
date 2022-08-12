@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Navbar from "./Navbar";
-import {pickPrice, calculateTotal} from "../utils/utils";
+import {pickPrice, calculateTotal, calculateQuantity, calcualteTax} from "../utils/utils";
 import { removeFromCart, addToCart } from "../actions/cart";
 
 
@@ -9,15 +9,8 @@ export class Cart extends React.Component {
     updateCart = (product) => {
         this.props.updateCart(product);
     }
-    removeItem = (id) => {
-        this.props.removeItem(id);
-    }
-    calculateQuantity = () => {
-        let quantity = 0;
-        this.props.cart.forEach(product => {
-            quantity += product.quantity;
-        })
-        return quantity;
+    removeItem = (product) => {
+        this.props.removeItem(product);
     }
     changeImage = (e) => {
         e.preventDefault();
@@ -43,27 +36,27 @@ export class Cart extends React.Component {
                 <Navbar />
                 <div className="cart page-body">
                     <h1 className="cart-heading">Cart</h1>
-                    <div className="cart-items">{this.props.cart && this.props.cart.map((product, index) =>(
+                    <div className="cart-items">{this.props.cart && this.props.cart.map(({id, brand, name, prices, attributes, selectedAttr, quantity, gallery}, index) =>(
                         <div className="cart-item" key={index}>
                             <div className="item-details">
-                                <h2 className="brand">{product.brand}</h2>
-                                <h2 className="name">{product.name}</h2>
-                                <h3 className="price">{this.props.defaultCurrency.symbol}{pickPrice(product.prices, this.props.defaultCurrency)}</h3>
+                                <h2 className="brand">{brand}</h2>
+                                <h2 className="name">{name}</h2>
+                                <h3 className="price">{this.props.defaultCurrency.symbol}{pickPrice(prices, this.props.defaultCurrency)}</h3>
                                 {
-                                product.attributes.map((attribute, index) =>(
-                                    <div className="cart-item-attribute" key={attribute.name}>
-                                        <p className="attribute-name">{attribute.name}:</p>
+                                attributes.map(({name, items}, index) =>(
+                                    <div className="cart-item-attribute" key={name}>
+                                        <p className="attribute-name">{name}:</p>
                                         <div className="attribute-value">
                                         {
-                                        attribute.items.map((item) =>
-                                            attribute.name === "Color" ?
-                                                item.value === product.selectedAttr[index].value ?
-                                                    <div className={attribute.name + ' selected'} key={item.value}><button style={{backgroundColor: item.value}}/></div>:
-                                                    <div className={attribute.name} key={item.value}><button style={{backgroundColor: item.value}}/></div>
+                                        items.map(({value}) =>
+                                            name === "Color" ?
+                                                value === selectedAttr[index].value ?
+                                                    <div className={name + ' selected'} key={value}><button style={{backgroundColor: value}}/></div>:
+                                                    <div className={name} key={value}><button style={{backgroundColor: value}}/></div>
                                                 :
-                                                item.value === product.selectedAttr[index].value?
-                                                    <div className='other-attr selected' key={item.value}><button>{item.value}</button></div>:
-                                                    <div className='other-attr' key={item.value}><button>{item.value}</button></div>
+                                                value === selectedAttr[index].value?
+                                                    <div className='other-attr selected' key={value}><button>{value}</button></div>:
+                                                    <div className='other-attr' key={value}><button>{value}</button></div>
                                             )
                                         }
                                         </div>
@@ -72,24 +65,24 @@ export class Cart extends React.Component {
                             </div>
                             <div className="quantity-image">
                                 <div className="quantity">
-                                    <button onClick={()=>{this.updateCart({...product, quantity: 1})}}>+</button>
-                                    <p>{product.quantity}</p>
-                                    <button onClick={()=>{product.quantity > 1? this.updateCart({...product, quantity: -1}) : this.removeItem(product.id) }}>-</button>
+                                    <button onClick={()=>{this.updateCart({id, quantity: 1, selectedAttr})}}>+</button>
+                                    <p>{quantity}</p>
+                                    <button onClick={()=>{quantity > 1? this.updateCart({id, quantity: -1, selectedAttr}) : this.removeItem({id, selectedAttr}) }}>-</button>
                                 </div>
                                 <div className="image">
-                                    <img src={product.gallery[0]} alt={product.name}></img>
-                                    <div className="browse">
-                                        <button id={product.id} onClick={this.changeImage}>{`<`}</button>
-                                        <button id={product.id} onClick={this.changeImage}>{`>`}</button>
-                                    </div>
+                                    <img src={gallery[0]} alt={name}></img>
+                                    {gallery.length > 1 && <div className="browse">
+                                        <button id={id} onClick={this.changeImage}>{`<`}</button>
+                                        <button id={id} onClick={this.changeImage}>{`>`}</button>
+                                    </div>}
                                 </div>
                             </div>
                         </div>
                     ))}
                     </div>
                     <div className="cart-summary">
-                        <p>Tax 21%: <b>{this.props.defaultCurrency?.symbol} {(calculateTotal(this.props.cart, this.props.defaultCurrency) * (21/100)).toFixed(2)}</b></p>
-                        <p>Quantity: <b>{this.calculateQuantity()}</b></p>
+                        <p>Tax 21%: <b>{this.props.defaultCurrency?.symbol} {calcualteTax(calculateTotal(this.props.cart, this.props.defaultCurrency))}</b></p>
+                        <p>Quantity: <b>{calculateQuantity(this.props.cart)}</b></p>
                         <p>Total: <b>{this.props.defaultCurrency?.symbol} {calculateTotal(this.props.cart, this.props.defaultCurrency)}</b></p>
                         <button>Order</button>
                     </div>
@@ -104,16 +97,16 @@ const mapDispatchToProps = dispatch => {
         updateCart: (product) => {
             dispatch(addToCart(product));
         },
-        removeItem: (productID) => {
-            dispatch(removeFromCart(productID));
+        removeItem: (product) => {
+            dispatch(removeFromCart(product));
         }
     }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = ({cart, currencies}) => {
     return {
-        cart: state.cart.cart,
-        defaultCurrency: state.currencies.defaultCurrency,
+        cart: cart.cart,
+        defaultCurrency: currencies.defaultCurrency,
     }
 }
 

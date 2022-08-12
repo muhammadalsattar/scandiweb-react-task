@@ -16,6 +16,6 @@ body {
 
 .faded {
   background-color: rgba(57, 55, 72, 0.22);
-  opacity: .5;
+  opacity: .3;
   filter: blur(.5px);
 }

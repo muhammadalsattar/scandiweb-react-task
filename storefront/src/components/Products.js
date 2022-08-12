@@ -10,11 +10,11 @@ export class Products extends React.Component {
   updateCart = e => {
     e.preventDefault();
 
-    const product = this.props.products.find(product => product.id === e.target.id);
-    const selectedAttr = product.attributes.map(attribute => {
+    const product = this.props.products.find(({id}) => id === e.target.id);
+    const selectedAttr = product.attributes.map(({name, items}) => {
       return {
-        name: attribute.name,
-        value: attribute.items[0].value
+        name,
+        value: items[0].value
       };
     });
     const newProduct = {...product, selectedAttr, quantity: 1};
@@ -30,7 +30,7 @@ export class Products extends React.Component {
 
   loadMore = e => {
     e.preventDefault();
-    this.props.setLoadedProducts(this.props.loadedProducts, this.props.allProducts.length);
+    this.props.setLoadedProducts(this.props.loadedProducts, this.props.allProducts);
   }
   
   render() {
@@ -40,25 +40,25 @@ export class Products extends React.Component {
         <div className="products page-body">
           <h1 className="category-name">{this.props.defaultCategory}</h1>
           <div className="products-list">
-            {this.props.products.map(product =>
+            {this.props.products.map(({id, name, brand, inStock, gallery, prices}) =>
               (
-              <div className={"product-item " + product.inStock} key={product.id}>
-                {product.inStock && <h2 className="out-stock">out of stock</h2>}
+              <div className={"product-item " + inStock} key={id}>
+                {!inStock && <h2 className="out-stock">out of stock</h2>}
                 <div className="product-image">
-                  <Link to={`/product?id=${product.id}`} ><img src={product.gallery[0]} alt={product.name}></img></Link>
+                  <Link to={`/product?id=${id}`} ><img src={gallery[0]} alt={name}></img></Link>
                 </div>
                 <div className="product-info">
-                  <p className="product-name">{product.name}</p>
-                  <p className="product-price">{this.props.defaultCurrency.symbol}{pickPrice(product.prices, this.props.defaultCurrency)}</p>
+                  <p className="product-name">{name}</p>
+                  <p className="product-price">{this.props.defaultCurrency.symbol}{pickPrice(prices, this.props.defaultCurrency)}</p>
+                  {inStock && <button className="bag-button"><img id={id} onClick={this.updateCart} src={process.env.PUBLIC_URL+"/circle-icon.png"} alt="cart-circle"></img></button>}
                 </div>
-                <button className="bag-button"><img id={product.id} onClick={this.updateCart} src={process.env.PUBLIC_URL+"/circle-icon.png"} alt="cart-circle"></img></button>
               </div>
               )
             )}
           </div>
-        </div>
-        <div className="load-more">
-          { this.props.allProducts.length > this.props.loadedProducts && <button onClick={this.loadMore}>Load More</button>}
+          <div className="load-more">
+            { this.props.allProducts > this.props.loadedProducts && <button onClick={this.loadMore}>Load More</button>}
+          </div>
         </div>
     </div>
     );
@@ -83,20 +83,20 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = ({categories: {defaultCategory}, products, cart: {cart}, currencies: {defaultCurrency}}) => {
   return {
-    products: state.categories.defaultCategory.name === "all"?
-    state.products.products.slice(0, state.products.loadedProducts).map(product => {
+    products: defaultCategory.name === "all"?
+    products.products.slice(0, products.loadedProducts).map(product => {
       return product;
     }):
-    state.products.products.slice(0, state.products.loadedProducts).filter(product=>product.category === state.categories.defaultCategory.name).map(product => {
+    products.products.filter(product=>product.category === defaultCategory.name).slice(0, products.loadedProducts).map(product => {
       return product;
     }),
-    allProducts: state.products.products,
-    loadedProducts: state.products.loadedProducts,
-    defaultCategory: state.categories.defaultCategory.name,
-    cart: state.cart.cart,
-    defaultCurrency: state.currencies.defaultCurrency
+    allProducts: defaultCategory.name !== "all" ? products.products.filter(product=>product.category === defaultCategory.name).length : products.products.length,
+    loadedProducts: products.loadedProducts,
+    defaultCategory: defaultCategory.name,
+    cart,
+    defaultCurrency
   };
 }
 

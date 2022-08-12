@@ -52,21 +52,21 @@ export class Product extends React.Component {
             <h1 className="product-name">{this.props.product?.name}</h1>
             <div className="product-attributes">
             {
-            this.props.product?.attributes.map((attribute) =>
+            this.props.product?.attributes.map(({id, name, items}) =>
               (
-              <div className="product-attribute" key={attribute.name}>
-                <h4>{attribute.name}:</h4>
+              <div className="product-attribute" key={name}>
+                <h4>{name}:</h4>
                 <div className="product-attribute-values">
                 {
-                  attribute.items.map((item, index) =>
-                    attribute.name === "Color"?
+                  items.map((item, index) =>
+                    name === "Color"?
                       index === 0?
-                        <div key={item.id} id="selected" className={attribute.id.replaceAll(' ', '-')}><button id={item.value} onClick={this.changeActiveAttr} style={{backgroundColor: item.value}}/></div>:
-                        <div key={item.id} className={attribute.id.replaceAll(' ', '-')}><button id={item.value} onClick={this.changeActiveAttr} style={{backgroundColor: item.value}}/></div>
+                        <div key={item.id} id="selected" className={id.replaceAll(' ', '-')}><button id={item.value} onClick={this.changeActiveAttr} style={{backgroundColor: item.value}}/></div>:
+                        <div key={item.id} className={id.replaceAll(' ', '-')}><button id={item.value} onClick={this.changeActiveAttr} style={{backgroundColor: item.value}}/></div>
                       :
                       index === 0?
-                      <div key={item.id} id="selected" className={attribute.id.replaceAll(' ', '-')}><button id={item.value} onClick={this.changeActiveAttr}>{item.value}</button></div>: 
-                      <div key={item.id} className={attribute.id.replaceAll(' ', '-')}><button id={item.value} onClick={this.changeActiveAttr}>{item.value}</button></div>
+                      <div key={item.id} id="selected" className={id.replaceAll(' ', '-')}><button id={item.value} onClick={this.changeActiveAttr}>{item.value}</button></div>: 
+                      <div key={item.id} className={id.replaceAll(' ', '-')}><button id={item.value} onClick={this.changeActiveAttr}>{item.value}</button></div>
                   )
                 }
                 </div>
@@ -77,11 +77,11 @@ export class Product extends React.Component {
             <div className="product-price">
               <h4>Price:</h4>
               <h4 className="price">
-              {this.props.product?.prices.find((price) => price.currency.symbol === this.props.defaultCurrency.symbol)?.currency.symbol}
-              {this.props.product?.prices.find((price) => price.currency.symbol === this.props.defaultCurrency.symbol)?.amount}
+              {this.props.product?.prices.find(({currency: {symbol}}) => symbol === this.props.defaultCurrency.symbol)?.currency.symbol}
+              {this.props.product?.prices.find(({currency: {symbol}}) => symbol === this.props.defaultCurrency.symbol)?.amount}
               </h4>
             </div>
-            <button className="cart" onClick={(e)=>{this.addToCart(this.props.product)}}>Add to Cart</button>
+            <button className="cart" disabled={!this.props.product?.inStock} onClick={(e)=>{this.addToCart(this.props.product)}}>Add to Cart</button>
             <div className="product-description">
               <p>{new DOMParser().parseFromString(this.props.product?.description, "text/html").body.textContent}</p>
             </div>
@@ -98,11 +98,11 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = ({products, currencies, cart}) => {
   return {
-    product: state.products.products.find(product => product.id === new URLSearchParams(window.location.search).get("id")),
-    defaultCurrency: state.currencies.defaultCurrency,
-    cart: state.cart.cart
+    product: products.products.find(product => product.id === new URLSearchParams(window.location.search).get("id")),
+    defaultCurrency: currencies.defaultCurrency,
+    cart: cart.cart
   }
 }
 

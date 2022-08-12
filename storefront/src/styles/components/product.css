@@ -134,6 +134,11 @@
     cursor: pointer;
 }
 
+.product button.cart[disabled] {
+    cursor: default;
+    opacity: .6;
+}
+
 /* product description */
 .product .product-description {
     margin: 1em 0;

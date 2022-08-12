@@ -27,4 +27,17 @@ const loadProducts = (products, loadedProducts) => {
     }
 }
 
-export {pickPrice, calculateTotal, loadProducts};
+const calculateQuantity = (cart) => {
+    let quantity = 0;
+    cart.forEach(product => {
+        quantity += product.quantity;
+    }
+    )
+    return quantity;
+}
+
+const calcualteTax = (total) => {
+    return (total * (21/100)).toFixed(2);
+}
+
+export {pickPrice, calculateTotal, loadProducts, calculateQuantity, calcualteTax};
