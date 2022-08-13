@@ -10,8 +10,21 @@ import { setActiveProduct } from "../actions/products";
 export class Product extends React.Component {
 
   async componentDidMount() {
+    // Set the active product in the store
     const product = await getProduct(new URLSearchParams(window.location.search).get("id"))
     Store.dispatch(setActiveProduct(product));
+
+    // Set background color of the product attribute values
+    document.querySelectorAll(".product-attribute-values button").forEach(button => {
+      button.style.backgroundColor = button.id;
+    })
+  }
+
+  componentDidUpdate() {
+    // Set background color of the product attribute values
+    document.querySelectorAll(".product-attribute-values button").forEach(button => {
+      button.style.backgroundColor = button.id;
+    })
   }
 
   changeFocuesdImage = (e) => {
@@ -69,8 +82,8 @@ export class Product extends React.Component {
                   items.map((item, index) =>
                     name === "Color"?
                       index === 0?
-                        <div key={item.id} id="selected" className={id.replaceAll(' ', '-')}><button id={item.value} onClick={this.changeActiveAttr} style={{backgroundColor: item.value}}/></div>:
-                        <div key={item.id} className={id.replaceAll(' ', '-')}><button id={item.value} onClick={this.changeActiveAttr} style={{backgroundColor: item.value}}/></div>
+                        <div key={item.id} id="selected" className={id.replaceAll(' ', '-')}><button id={item.value} onClick={this.changeActiveAttr}/></div>:
+                        <div key={item.id} className={id.replaceAll(' ', '-')}><button id={item.value} onClick={this.changeActiveAttr}/></div>
                       :
                       index === 0?
                       <div key={item.id} id="selected" className={id.replaceAll(' ', '-')}><button id={item.value} onClick={this.changeActiveAttr}>{item.value}</button></div>: 

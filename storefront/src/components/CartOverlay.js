@@ -5,12 +5,25 @@ import { removeFromCart, addToCart } from "../actions/cart";
 import {pickPrice, calculateTotal} from "../utils/utils";
 
 export class CartOverlay extends React.Component {
+    componentDidMount() {
+        document.querySelectorAll(".cart-overlay .attribute-value button").forEach(button => {
+            button.style.backgroundColor = button.id;
+        })
+    }
+    componentDidUpdate() {
+        document.querySelectorAll(".cart-overlay .attribute-value button").forEach(button => {
+            button.style.backgroundColor = button.id;
+        })
+    }
+
     updateCart = (product) => {
         this.props.updateCart(product);
     }
+
     removeItem = (product) => {
         this.props.removeItem(product);
     }
+
     render() {
         return (
             <div className="cart-overlay" hidden>
@@ -31,8 +44,8 @@ export class CartOverlay extends React.Component {
                                     items.map(({value}) =>
                                         name === "Color" ?
                                             value === selectedAttr[index].value ?
-                                                <div className={name + ' selected'} key={value}><button style={{backgroundColor: value}}/></div>:
-                                                <div className={name} key={value}><button style={{backgroundColor: value}}/></div>
+                                                <div className={name + ' selected'} key={value}><button id={value}/></div>:
+                                                <div className={name} key={value}><button id={value}/></div>
                                             :
                                             value === selectedAttr[index].value?
                                                 <div className='other-attr selected' key={value}><button>{value}</button></div>:

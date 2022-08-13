@@ -14,7 +14,7 @@ export class Products extends React.Component {
     const selectedAttr = product.attributes.map(({name, items}) => {
       return {
         name,
-        value: items[0].value
+        value: items[0].displayValue
       };
     });
     const newProduct = {...product, selectedAttr, quantity: 1};
@@ -86,7 +86,6 @@ const mapDispatchToProps = dispatch => {
     }
   };
 };
-
 const mapStateToProps = ({categories: {defaultCategory}, products: {products, loadedProducts}, cart: {cart}, currencies: {defaultCurrency}}) => {
   return {
 

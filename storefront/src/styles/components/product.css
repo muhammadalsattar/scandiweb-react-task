@@ -26,15 +26,16 @@
 .product .product-gallery-images img {
     width: 6em !important;
     margin-bottom: .4em;
+    object-fit: contain;
 }
 
 .product .product-gallery .image-focused {
     width: 80%;
-    text-align: center;
 }
 
 .product .product-gallery .image-focused img {
-    width: 80% !important;
+    max-height: 70vh;
+    object-fit: contain;
 }
 
 /* Product info */
@@ -75,10 +76,11 @@
     width: 100%;
     height: 100%;
     border: none;
+    outline: 1px solid rgba(57, 55, 72, 0.22);
 }
 
 .product .product-attribute-values .Color#selected {
-    border: 1px solid #5ECE7B;
+    border: 2px solid #5ECE7B;
 }
 
 .product .product-attribute-values div {
