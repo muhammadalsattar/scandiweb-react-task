@@ -33,6 +33,10 @@ export class Products extends React.Component {
     this.props.setLoadedProducts(this.props.loadedProducts, this.props.allProducts);
   }
   
+  setActiveProduct = id => () => {
+    this.props.setActiveProduct(this.props.products.find(product => product.id === id));
+  }
+
   render() {
     return (
       <div className="products-page">
@@ -40,11 +44,11 @@ export class Products extends React.Component {
         <div className="products page-body">
           <h1 className="category-name">{this.props.defaultCategory}</h1>
           <div className="products-list">
-            {this.props.products.map(({id, name, brand, inStock, gallery, prices}) =>
+            {this.props.products.map(({id, name, inStock, gallery, prices}) =>
               (
               <div className={"product-item " + inStock} key={id}>
                 {!inStock && <h2 className="out-stock">out of stock</h2>}
-                <div className="product-image">
+                <div className="product-image" onClick={this.setActiveProduct(id)}>
                   <Link to={`/product?id=${id}`} ><img src={gallery[0]} alt={name}></img></Link>
                 </div>
                 <div className="product-info">
@@ -70,8 +74,8 @@ const mapDispatchToProps = dispatch => {
     addToCart: product => {
       dispatch(addToCart(product));
     },
-    setActiveProduct: productID => {
-      dispatch(setActiveProduct(productID));
+    setActiveProduct: product => {
+      dispatch(setActiveProduct(product));
     },
     setLoadedProducts: (loadedProducts, productsLength) => {
       if(loadedProducts + 5 > productsLength) {
@@ -83,17 +87,12 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-const mapStateToProps = ({categories: {defaultCategory}, products, cart: {cart}, currencies: {defaultCurrency}}) => {
+const mapStateToProps = ({categories: {defaultCategory}, products: {products, loadedProducts}, cart: {cart}, currencies: {defaultCurrency}}) => {
   return {
-    products: defaultCategory.name === "all"?
-    products.products.slice(0, products.loadedProducts).map(product => {
-      return product;
-    }):
-    products.products.filter(product=>product.category === defaultCategory.name).slice(0, products.loadedProducts).map(product => {
-      return product;
-    }),
-    allProducts: defaultCategory.name !== "all" ? products.products.filter(product=>product.category === defaultCategory.name).length : products.products.length,
-    loadedProducts: products.loadedProducts,
+
+    products: products.slice(0, loadedProducts),
+    allProducts: products.length,
+    loadedProducts,
     defaultCategory: defaultCategory.name,
     cart,
     defaultCurrency

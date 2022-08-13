@@ -2,9 +2,17 @@ import React from "react";
 import { connect } from "react-redux";
 import Navbar from "./Navbar";
 import {addToCart} from "../actions/cart";
+import { getProduct } from "../apollo/requests";
+import Store from "../store/Store";
+import { setActiveProduct } from "../actions/products";
 
 
 export class Product extends React.Component {
+
+  async componentDidMount() {
+    const product = await getProduct(new URLSearchParams(window.location.search).get("id"))
+    Store.dispatch(setActiveProduct(product));
+  }
 
   changeFocuesdImage = (e) => {
     const src = e.target.src;
@@ -98,9 +106,9 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const mapStateToProps = ({products, currencies, cart}) => {
+const mapStateToProps = ({products: {activeProduct}, currencies, cart}) => {
   return {
-    product: products.products.find(product => product.id === new URLSearchParams(window.location.search).get("id")),
+    product: activeProduct,
     defaultCurrency: currencies.defaultCurrency,
     cart: cart.cart
   }

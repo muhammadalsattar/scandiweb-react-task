@@ -2,8 +2,10 @@ import React from "react";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import CartOverlay from "./CartOverlay";
+import { setProducts } from "../actions/products";
 import {setDefaultCategory} from "../actions/categories";
 import {setDefaultCurrency} from "../actions/currencies";
+import { getProductsByCategory } from "../apollo/requests";
 import { calculateQuantity } from "../utils/utils";
 
 export class Navbar extends React.Component {
@@ -39,6 +41,7 @@ export class Navbar extends React.Component {
     setDefaultCategory = (category) => {
         return () => {
             this.props.setDefaultCategory(category);
+            this.props.setProducts(category.name);
         }
     }
     render() {
@@ -77,6 +80,10 @@ const mapDispatchToProps = dispatch => {
         },
         setDefaultCurrency: (currency) => {
             dispatch(setDefaultCurrency(currency));
+        },
+        setProducts: async (categoryName) => {
+            const products = await getProductsByCategory(categoryName);
+            dispatch(setProducts(products));
         }
     }
 }
