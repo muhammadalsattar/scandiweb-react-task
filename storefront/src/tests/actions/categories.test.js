@@ -1,8 +1,12 @@
 import {setCategories, setDefaultCategory} from '../../actions/categories';
 import { initialState } from '../../setupTests';
 
+let categories;
+beforeAll(() => {
+    categories = initialState.categories;
+})
+
 test("setCategories returns correct action", () => {
-    const categories = initialState.categories;
     const action = setCategories(categories);
     expect(action).toEqual({
         type: 'SET_CATEGORIES',
@@ -11,10 +15,9 @@ test("setCategories returns correct action", () => {
 })
 
 test("setDefaultCategory returns correct action", () => {
-    const category = initialState.categories[0];
-    const action = setDefaultCategory(category);
+    const action = setDefaultCategory(categories[0]);
     expect(action).toEqual({
         type: 'SET_DEFAULT_CATEGORY',
-        category
+        category: categories[0]
     });
 })

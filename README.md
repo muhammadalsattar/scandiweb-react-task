@@ -1,4 +1,5 @@
 # Scandiweb junior React developer task
+This is an E-Commerce web app where user can list products by category, view products, and control her shop cart.
 
 ## API Instructions
 - `npm install` - installs the dependencies

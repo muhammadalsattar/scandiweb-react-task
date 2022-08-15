@@ -18,6 +18,9 @@ export class Product extends React.Component {
     document.querySelectorAll(".product-attribute-values button").forEach(button => {
       button.style.backgroundColor = button.id;
     })
+
+    // Set product description
+    document.querySelector(".product-description p").innerHTML = this.props.product.description
   }
 
   componentDidUpdate() {
@@ -104,7 +107,7 @@ export class Product extends React.Component {
             </div>
             <button className="cart" disabled={!this.props.product?.inStock} onClick={(e)=>{this.addToCart(this.props.product)}}>Add to Cart</button>
             <div className="product-description">
-              <p>{new DOMParser().parseFromString(this.props.product?.description, "text/html").body.textContent}</p>
+              <p></p>
             </div>
           </div>
         </div>

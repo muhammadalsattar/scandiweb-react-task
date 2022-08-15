@@ -1,32 +1,29 @@
 import productsReducer from "../../reducers/productsReducer";
+import {setProducts, setLoadedProducts, setActiveProduct} from "../../actions/products"
 import { initialState } from "../../setupTests";
 
-test("Should set products", () => {
-    const products = initialState.products;
-    const action = {
-        type: 'SET_PRODUCTS',
-        products
-    };
-    const newState = productsReducer({products: [], activeProduct: null, loadedProducts: 0}, action);
-    expect(newState).toEqual({products, activeProduct: null, loadedProducts: 0});
+let defaultState;
+let products;
+beforeAll(()=>{
+    defaultState = {
+        products: [],
+        activeProduct: null,
+        loadedProducts: 5
+    }
+    products = initialState.products
 })
 
-test("Should set active product", () => {
-    const product = initialState.products[0];
-    const action = {
-        type: 'SET_ACTIVE_PRODUCT',
-        product
-    };
-    const newState = productsReducer({products: [], activeProduct: null, loadedProducts: 0}, action);
-    expect(newState).toEqual({products: [], activeProduct: product, loadedProducts: 0});
+test("Should set products correctly", ()=>{
+    const state = productsReducer(defaultState, setProducts(products))
+    expect(state.products).toEqual(products)
 })
 
-test("Should set loaded products", () => {
-    const loadedProducts = initialState.loadedProducts;
-    const action = {
-        type: 'SET_LOADED_PRODUCTS',
-        loadedProducts
-    };
-    const newState = productsReducer({products: [], activeProduct: null, loadedProducts: 0}, action);
-    expect(newState).toEqual({products: [], activeProduct: null, loadedProducts});
+test("Should set loaded products correctly", ()=>{
+    const state = productsReducer(defaultState, setLoadedProducts(10))
+    expect(state.loadedProducts).toEqual(10)
+})
+
+test("Should set active product correctly", ()=>{
+    const state = productsReducer(defaultState, setActiveProduct(products[0]))
+    expect(state.activeProduct).toEqual(products[0])
 })

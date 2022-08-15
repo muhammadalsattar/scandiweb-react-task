@@ -1,23 +1,40 @@
-import { pickPrice, calculateTotal, loadProducts } from "../../utils/utils";
-import {initialState} from "../../setupTests"
+import {pickPrice, calculateTotal, calcualteTax, calculateQuantity, loadProducts} from "../../utils/utils"
+import { initialState } from "../../setupTests"
 
-test("Should pick price", () => {
-    const product = initialState.products[0];
-    const price = pickPrice(product.prices, initialState.currencies[0]);
-    expect(price).toEqual(product.prices.find(price => price.currency.symbol === initialState.currencies[0].symbol).amount);
+let products;
+let currencies;
+let total = 0
+let quantity = 0
+let loadedProducts;
+beforeAll(()=>{
+    products = initialState.products
+    currencies = initialState.currencies
+    products.forEach(product=> total += product.prices.find(price=>price.currency.label === currencies[0].label).amount)
+    products.forEach(product=> quantity+= product.quantity)
+    loadedProducts = 0
 })
 
-test("Should calculate total", () => {
-    const cart = initialState.cart;
-    const total = calculateTotal(cart, initialState.currencies[0]);
-    expect(total).toEqual(initialState.cart.reduce((total, product) => {
-        return total + pickPrice(product.prices, initialState.currencies[0]) * product.quantity;
-    }, 0).toFixed(2));
+test("Should pick default currency price correctly", ()=>{
+    const result = pickPrice(products[0].prices, currencies[0])
+    expect(result).toBe(products[0].prices[0].amount)
 })
 
-test("Should load products", () => {
-    const products = initialState.products;
-    const loadedProducts = 0;
-    const newProducts = loadProducts(products, loadedProducts);
-    expect(newProducts).toEqual(products.slice(loadedProducts, loadedProducts + 5));
+test("Should calculate total cart items cost", ()=>{
+    const result = calculateTotal(products, currencies[0])
+    expect(result).toBe(Math.round((total + Number.EPSILON) * 100) / 100)
+})
+
+test("Should calculate total cost tax", ()=>{
+    const result = calcualteTax(total)
+    expect(result).toBe((total * (21/100)).toFixed(2))
+})
+
+test("Should calculate cart items quantity correctly", ()=>{
+    const result = calculateQuantity(products)
+    expect(result).toBe(quantity)
+})
+
+test("Should load products correctly", ()=>{
+    const result = loadProducts(products, loadedProducts)
+    expect(result).toEqual(products.slice(loadedProducts, loadedProducts + 5))
 })

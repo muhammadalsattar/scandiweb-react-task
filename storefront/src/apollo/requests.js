@@ -2,29 +2,45 @@ import client from './client';
 import { GET_PRODUCTS, GET_PRODUCT, GET_CATEGORIES, GET_CURRNCIES } from './queries';
 
 export const getProductsByCategory = async (name) => {
-    const {data} = await client.query({
-        query: GET_PRODUCTS
-    })
-    return data.categories.find(category => category.name === name).products;
+    try {
+        const {data} = await client.query({
+            query: GET_PRODUCTS
+        })
+        return data.categories.find(category => category.name === name).products;
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 export const getProduct = async (id) => {
-    const {data} = await client.query({
-        query: GET_PRODUCT(id)
-    })
-    return data.product;
+    try {
+        const {data} = await client.query({
+            query: GET_PRODUCT(id)
+        })
+        return data.product;
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 export const getCategories = async () => {
-    const {data} = await client.query({
-        query: GET_CATEGORIES
-    })
-    return data.categories;
+    try {
+        const {data} = await client.query({
+            query: GET_CATEGORIES
+        })
+        return data.categories;
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 export const getCurrencies = async () => {
-    const {data} = await client.query({
-        query: GET_CURRNCIES
-    })
-    return data.currencies;
+    try {
+        const {data} = await client.query({
+            query: GET_CURRNCIES
+        })
+        return data.currencies;
+    } catch (error) {
+        console.log(error);
+    }
 }

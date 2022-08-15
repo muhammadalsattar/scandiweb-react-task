@@ -1,22 +1,25 @@
-import cartReducer from "../../reducers/cartReducer";
-import {initialState} from "../../setupTests";
+import cartReducer from '../../reducers/cartReducer';
+import { addToCart, removeFromCart } from '../../actions/cart';
+import {initialState} from '../../setupTests';
 
-test("Should return correct state with addToCart action", () => {
-    const product = initialState.products[0];
-    const action = {
-        type: 'ADD_TO_CART',
-        product
-    };
-    const newState = cartReducer({cart: []}, action);
-    expect(newState).toEqual({cart: [action.product]});
+let products;
+let defaultState;
+beforeAll(() => {
+    products = initialState.products;
+    defaultState = {cart:[]}
 })
 
-test("Should return correct state with removeFromCart action", () => {
-    const id = initialState.cart[0].id;
-    const action = {
-        type: 'REMOVE_FROM_CART',
-        id
-    };
-    const newState = cartReducer({cart: initialState.cart}, action);
-    expect(newState).toEqual({cart: initialState.cart.filter(product => product.id !== action.id)});
+test("Should add product to cart", ()=> {
+    const state = cartReducer(defaultState, addToCart(products[0]));
+    expect(state).toEqual({cart: [products[0]]}); 
+})
+
+test("Should update quantity of product in cart", ()=> {
+    const state = cartReducer({cart: [products[0]]}, addToCart(products[0]));
+    expect(state).toEqual({cart: [{...products[0], quantity: products[0].quantity + products[0].quantity}]}); 
+})
+
+test("Should remove correct product from cart", ()=>{
+    const state = cartReducer({cart:[products[0], products[1]]}, removeFromCart(products[0]))
+    expect(state).toEqual({cart: [products[1]]})
 })

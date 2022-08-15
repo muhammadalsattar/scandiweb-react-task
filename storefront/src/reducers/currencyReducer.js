@@ -13,7 +13,7 @@ const currencyReducer = (state = defaultState, action) => {
         case 'SET_DEFAULT_CURRENCY':
             return {
                 ...state,
-                defaultCurrency: action.defaultCurrency
+                defaultCurrency: action.currency
             }
         default:
             return state;

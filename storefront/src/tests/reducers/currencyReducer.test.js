@@ -1,22 +1,25 @@
 import currencyReducer from "../../reducers/currencyReducer";
-import { initialState } from "../../setupTests";
+import {setCurrencies, setDefaultCurrency} from "../../actions/currencies"
+import {initialState} from "../../setupTests"
 
-test("Should set currencies", () => {
-    const currencies = initialState.currencies;
-    const action = {
-        type: 'SET_CURRENCIES',
-        currencies
-    };
-    const newState = currencyReducer({currencies: [], defaultCurrency: {}}, action);
-    expect(newState).toEqual({currencies, defaultCurrency: {}});
+let defaultState;
+let currencies;
+
+beforeAll(() => {
+    defaultState = {
+        currencies: [],
+        defaultCurrency: {}
+    }
+    currencies = initialState.currencies
+  });
+
+
+test("Should set currencies correctly", ()=>{
+    const state = currencyReducer(defaultState, setCurrencies(currencies))
+    expect(state.currencies).toEqual(currencies)
 })
 
-test("Should set default currency", () => {
-    const currency = initialState.currencies[0];
-    const action = {
-        type: 'SET_DEFAULT_CURRENCY',
-        defaultCurrency: currency
-    };
-    const newState = currencyReducer({currencies: [], defaultCurrency: {}}, action);
-    expect(newState).toEqual({currencies: [], defaultCurrency: currency});
+test("Should set default currency correctly", ()=>{
+    const state = currencyReducer(defaultState, setDefaultCurrency(currencies[0]))
+    expect(state.defaultCurrency).toEqual(currencies[0])
 })

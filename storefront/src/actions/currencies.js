@@ -2,9 +2,9 @@ const setCurrencies = (currencies) => ({
     type: 'SET_CURRENCIES',
     currencies
 });
-const setDefaultCurrency = (defaultCurrency) => ({
+const setDefaultCurrency = (currency) => ({
     type: 'SET_DEFAULT_CURRENCY',
-    defaultCurrency
+    currency
 });
 
 export { setCurrencies, setDefaultCurrency };

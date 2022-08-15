@@ -10,7 +10,7 @@ const calculateTotal = (cart, defaultCurrency) => {
     cart.forEach(product => {
         total += pickPrice(product.prices, defaultCurrency) * product.quantity;
     })
-    return total.toFixed(2);
+    return Math.round((total + Number.EPSILON) * 100) / 100;
 }
 
 const loadProducts = (products, loadedProducts) => {

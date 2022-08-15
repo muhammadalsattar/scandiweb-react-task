@@ -1,8 +1,12 @@
 import {addToCart, removeFromCart} from '../../actions/cart';
 import { initialState } from '../../setupTests';
 
+let product;
+beforeAll(() => {
+    product = initialState.products[0];
+})
+
 test('addToCart returns correct action', () => {
-    const product = initialState.products[0];
     const action = addToCart(product);
     expect(action).toEqual({
         type: 'ADD_TO_CART',
@@ -11,10 +15,9 @@ test('addToCart returns correct action', () => {
 })
 
 test('removeFromCart returns correct action', () => {
-    const id = initialState.products[0].id;
-    const action = removeFromCart(id);
+    const action = removeFromCart(product);
     expect(action).toEqual({
         type: 'REMOVE_FROM_CART',
-        id
+        product
     });
 })
