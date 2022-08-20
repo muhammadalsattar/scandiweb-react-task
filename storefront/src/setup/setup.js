@@ -13,9 +13,10 @@ const setup = async() => {
     const currencies = await getCurrencies();
     const products = await getProductsByCategory(categories[0].name);
 
-    Store.dispatch(setCategories(categories));
+
+    Store.dispatch(setCategories(categories.slice(1)));
     Store.dispatch(setCurrencies(currencies));
-    Store.dispatch(setDefaultCategory(categories[0]));
+    Store.dispatch(setDefaultCategory(categories[1]));
     Store.dispatch(setDefaultCurrency(currencies[0]));
     Store.dispatch(setProducts(products));
 };

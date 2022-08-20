@@ -3,10 +3,15 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Navbar from "./Navbar";
 import { addToCart } from "../actions/cart";
-import { setActiveProduct, setLoadedProducts } from "../actions/products";
+import { setActiveProduct, setLoadedProducts, setProducts } from "../actions/products";
 import {pickPrice} from "../utils/utils";
+import { getProductsByCategory } from "../apollo/requests";
 
 export class Products extends React.Component {
+  async componentDidMount(){
+    const products = await getProductsByCategory(this.props.defaultCategory)
+    this.props.setProducts(products)
+  }
   updateCart = e => {
     e.preventDefault();
 
@@ -73,6 +78,9 @@ const mapDispatchToProps = dispatch => {
   return {
     addToCart: product => {
       dispatch(addToCart(product));
+    },
+    setProducts: products =>{
+      dispatch(setProducts(products))
     },
     setActiveProduct: product => {
       dispatch(setActiveProduct(product));

@@ -20,7 +20,9 @@ export class Product extends React.Component {
     })
 
     // Set product description
-    document.querySelector(".product-description p").innerHTML = this.props.product.description
+    const htmlParser = new DOMParser();
+    const html = htmlParser.parseFromString(this.props?.product?.description, "text/html").body;
+    document.querySelector(".product-description").appendChild(html);
   }
 
   componentDidUpdate() {
@@ -106,9 +108,7 @@ export class Product extends React.Component {
               </h4>
             </div>
             <button className="cart" disabled={!this.props.product?.inStock} onClick={(e)=>{this.addToCart(this.props.product)}}>Add to Cart</button>
-            <div className="product-description">
-              <p></p>
-            </div>
+            <div className="product-description"></div>
           </div>
         </div>
     </div>
