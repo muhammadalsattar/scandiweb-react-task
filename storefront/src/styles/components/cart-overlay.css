@@ -8,7 +8,7 @@
     background-color: #fff;
     z-index: 1;
     padding: 1em;
-    border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #E5E5E5;
     overflow-y: scroll;
 }
 
@@ -23,7 +23,7 @@
 }
 
 .cart-overlay .cart-item .attribute-name {
-    font-size: 0.9em;
+    font-size: .9em;
 }
 
 /* Color attr and other attributes styles */
@@ -36,25 +36,26 @@
 }
 
 .cart-overlay .attribute-value .other-attr {
-    margin: 0.1em;
+    margin: .1em;
 }
 
 .cart-overlay .attribute-value .other-attr button {
-    border: 1px solid #1d1f22;
+    border: 1px solid #1D1F22;
     background-color: #fff;
     border-radius: 0;
-    padding: 0.4em;
+    padding: .4em;
 }
 
 .cart-overlay .attribute-value .other-attr.selected button {
-    background-color: #1d1f22;
+    background-color: #1D1F22;
     color: #fff;
 }
 
 .cart-overlay .Color {
-    margin: 0 0.1em;
+    margin: 0 .1em;
     width: 1em;
     height: 1em;
+
 }
 
 .cart-overlay .Color button {
@@ -64,7 +65,7 @@
 }
 
 .cart-overlay .Color.selected {
-    border: 2px solid #5ece7b;
+    border: 2px solid #5ECE7B;
     padding: 1px;
 }
 
@@ -86,7 +87,7 @@
 }
 
 .cart-overlay .quantity-image .quantity {
-    margin: 0.5em;
+    margin: .5em;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -96,9 +97,9 @@
 
 .cart-overlay .quantity button {
     border-radius: 0;
-    border: 1.5px solid #1d1f22;
+    border: 1.5px solid #1D1F22;
     background-color: transparent;
-    font-size: 1.2em;
+    font-size: 1.2em
 }
 
 .cart-overlay .quantity-image .image {
@@ -112,6 +113,7 @@
     object-fit: contain;
 }
 
+
 /* Total and bag buttons styles */
 
 .cart-overlay .cart-total {
@@ -122,6 +124,7 @@
     font-weight: bold;
 }
 
+
 .cart-overlay .bag-checkout {
     display: flex;
     flex-direction: row;
@@ -130,17 +133,16 @@
     width: 100%;
 }
 
-.cart-overlay .view-bag,
-.checkout {
+.cart-overlay .view-bag, .checkout {
     width: 49%;
 }
 
 .cart-overlay .view-bag button {
     border-radius: 0;
     background-color: #fff;
-    color: #1d1f22;
-    border: 1px solid #1d1f22;
-    padding: 0.5em;
+    color: #1D1F22;
+    border: 1px solid #1D1F22;
+    padding: .5em;
     font-size: 1.1em;
     text-transform: uppercase;
     width: 100%;
@@ -149,10 +151,10 @@
 
 .cart-overlay .checkout button {
     border-radius: 0;
-    background-color: #5ece7b;
-    border: 1px solid #5ece7b;
+    background-color: #5ECE7B;
+    border: 1px solid #5ECE7B;
     color: #fff;
-    padding: 0.5em;
+    padding: .5em;
     font-size: 1.1em;
     text-transform: uppercase;
     width: 100%;

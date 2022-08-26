@@ -1,4 +1,4 @@
-.products {
+.products{
     padding: 5em 1em;
 }
 
@@ -9,21 +9,21 @@
     text-transform: capitalize;
 }
 
-.products .products-list {
+.products .products-list{
     display: grid;
     grid-template-columns: repeat(3, 400px);
-    grid-gap: 0.1em;
+    grid-gap: .1em;
     width: 90%;
-    margin: 0.5em auto;
+    margin: .5em auto;
 }
 
 /* product item */
-.products .product-item {
+.products .product-item{
     height: 450px;
     position: relative;
     padding: 1em;
-    margin: 0.5em 0.5em;
-    transition: all 0.5s ease-in-out;
+    margin: .5em .5em;
+    transition: all .5s ease-in-out;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -31,7 +31,7 @@
 }
 
 .products .product-item .out-stock {
-    color: #8d8f9a;
+    color: #8D8F9A;
     position: absolute;
     z-index: 1;
     top: 40%;
@@ -43,32 +43,32 @@
     font-weight: normal;
 }
 
-.products .product-item:hover {
-    box-shadow: 1px 1px 20px 1px #a8acb0;
+.products .product-item:hover{
+    box-shadow: 1px 1px 20px 1px #A8ACB0;
 }
 
-.products .product-item .product-image {
+.products .product-item .product-image{
     width: 100%;
 }
 
-.products .product-image img {
+.products .product-image img{
     width: 100%;
     max-height: 45vh;
     object-fit: contain;
     mix-blend-mode: multiply;
 }
 
-.products .product-item .product-info {
-    width: 100%;
-    height: 10%;
-    position: relative;
+.products .product-item .product-info{
+   width: 100%;
+   height: 10%;
+   position: relative;
 }
 
 .products .product-item .product-name {
     width: 100%;
     font-size: 1.2em;
     font-weight: 400;
-    margin-bottom: 0.5em;
+    margin-bottom: .5em;
 }
 
 /* Add to bag button */
@@ -82,6 +82,7 @@
     opacity: 0;
     transform: scale(1);
     transition: visibility 0s, opacity 0.3s, transform 0.3s linear;
+    
 }
 
 .products .product-item .bag-button:hover {
@@ -89,7 +90,7 @@
     cursor: pointer;
 }
 
-.products .product-item:hover .bag-button {
+.products .product-item:hover .bag-button{
     visibility: visible;
     opacity: 1;
 }
@@ -101,9 +102,9 @@
 }
 
 .products-page .load-more button {
-    background: #5ece7b;
+    background: #5ECE7B;
     color: #fff;
-    padding: 0.5em 1em;
+    padding: .5em 1em;
     border: none;
     border-radius: 5px;
     font-size: 1em;
@@ -113,7 +114,7 @@
 
 /* Small screens */
 @media screen and (max-width: 768px) {
-    .products .products-list {
+    .products .products-list{
         grid-template-columns: 1fr 1fr;
     }
 }

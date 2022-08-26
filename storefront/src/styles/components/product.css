@@ -25,7 +25,7 @@
 
 .product .product-gallery-images img {
     width: 6em !important;
-    margin-bottom: 0.4em;
+    margin-bottom: .4em;
     object-fit: contain;
 }
 
@@ -56,7 +56,7 @@
 }
 
 .product .product-attribute h4 {
-    margin: 0.3em;
+    margin: .3em;
 }
 .product .product-attribute-values {
     display: flex;
@@ -68,7 +68,7 @@
 .product .product-attribute-values .Color {
     width: 1.5em;
     height: 1.5em;
-    margin: 0 0.3em;
+    margin: 0 .3em;
     padding: 1px;
 }
 
@@ -80,26 +80,26 @@
 }
 
 .product .product-attribute-values .Color#selected {
-    border: 2px solid #5ece7b;
+    border: 2px solid #5ECE7B;
 }
 
 .product .product-attribute-values div {
-    margin: 0 0.2em;
+    margin: 0 .2em;
     padding: 1px;
 }
 
-.product .product-attribute-values div button {
-    color: #1d1f22;
+.product .product-attribute-values div button{
+    color: #1D1F22;
     background-color: #fff;
-    padding: 0.5em;
+    padding: .5em;
     font-size: 1.1em;
-    border: 1px solid #1d1f22;
+    border: 1px solid #1D1F22;
 }
 
-.product .product-attribute-values div#selected button {
+.product .product-attribute-values div#selected button{
     color: #fff;
-    background-color: #1d1f22;
-    padding: 0.5em;
+    background-color: #1D1F22;
+    padding: .5em;
     font-size: 1.1em;
 }
 
@@ -116,7 +116,7 @@
 }
 
 .product .product-price h4 {
-    margin: 0.3em;
+    margin: .3em;
 }
 
 .product .product-price .price {
@@ -126,11 +126,11 @@
 /* add-to-cart button */
 .product button.cart {
     margin: 1em 0;
-    background-color: #5ece7b;
+    background-color: #5ECE7B;
     color: #fff;
     font-size: 1.3em;
     border: none;
-    padding: 0.5em;
+    padding: .5em;
     width: 50%;
     text-transform: uppercase;
     cursor: pointer;
@@ -138,7 +138,7 @@
 
 .product button.cart[disabled] {
     cursor: default;
-    opacity: 0.6;
+    opacity: .6;
 }
 
 /* product description */

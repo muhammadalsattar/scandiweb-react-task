@@ -7,7 +7,7 @@
 }
 
 .cart .cart-item {
-    border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #E5E5E5;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -28,7 +28,7 @@
 .cart .attribute-name {
     font-weight: bold;
     text-transform: uppercase;
-    margin: 0.2em 0;
+    margin: .2em 0;
 }
 .cart .attribute-value {
     display: flex;
@@ -41,11 +41,12 @@
 .cart .Color {
     width: 1.5em;
     height: 1.5em;
-    margin: 0 0.2em;
+    margin: 0 .2em;
+
 }
 
 .cart .Color.selected {
-    border: 2px solid #5ece7b;
+    border: 2px solid #5ECE7B;
     padding: 1px;
 }
 
@@ -57,23 +58,23 @@
 }
 
 .cart .other-attr {
-    margin: 0.1em;
+    margin: .1em;
 }
 
 .cart .other-attr button {
-    border: 1px solid #1d1f22;
+    border: 1px solid #1D1F22;
     background-color: #fff;
     border-radius: 0;
-    padding: 0.7em;
+    padding: .7em;
 }
 
 .cart .other-attr.selected button {
-    background-color: #1d1f22;
+    background-color: #1D1F22;
     color: #fff;
 }
 
 /* quantity and image */
-.cart .quantity-image {
+.cart .quantity-image{
     display: flex;
     width: max-content;
     height: 17em;
@@ -90,16 +91,16 @@
     justify-content: space-between;
     align-items: center;
     height: 100%;
-    margin: 0 0.5em;
+    margin: 0 .5em;
 }
 
-.cart .quantity-image .quantity p {
+.cart .quantity-image .quantity p{
     font-size: 1.5em;
 }
 
 .cart .quantity-image .quantity button {
     border-radius: 0;
-    border: 1px solid #1d1f22;
+    border: 1px solid #1D1F22;
     background-color: transparent;
     font-size: 1.5em;
     width: 1.5em;
@@ -124,19 +125,19 @@
     right: 5%;
 }
 
-.cart .browse button {
-    margin: 0 0.1em;
-    padding: 0.2em 0.4em;
+.cart .browse button{
+    margin: 0 .1em;
+    padding: .2em .4em;
     border-radius: 0%;
     border: none;
     font-size: 1em;
     color: #fff;
-    background-color: rgba(0, 0, 0, 0.73);
+    background-color: rgba(0, 0, 0, 0.73);;
 }
 
 /* cart summary */
 .cart .cart-summary {
-    border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #E5E5E5;
     padding: 1em 0;
 }
 
@@ -146,8 +147,8 @@
 
 .cart .cart-summary button {
     border-radius: 0;
-    background-color: #5ece7b;
-    padding: 0.7em;
+    background-color: #5ECE7B;
+    padding: .7em;
     color: #fff;
     font-size: 1.1em;
     border: none;

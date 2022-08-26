@@ -5,18 +5,18 @@
 @import './components/cart';
 
 * {
-    font-family: 'Raleway', sans-serif !important;
+  font-family: 'Raleway', sans-serif !important;
 }
 
 body {
-    margin: 0;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .faded {
-    background-color: rgba(57, 55, 72, 0.22);
-    filter: blur(1px);
-    filter: opacity(0.4);
-    mix-blend-mode: multiply;
+  background-color: rgba(57, 55, 72, 0.22);
+  filter: blur(1px);
+  filter: opacity(.4);
+  mix-blend-mode: multiply;
 }
