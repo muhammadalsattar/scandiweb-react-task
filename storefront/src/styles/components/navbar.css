@@ -9,19 +9,19 @@ nav {
 /* categories */
 nav .category a {
     text-decoration: none;
-    color: inherit
+    color: inherit;
 }
 nav .category {
     border: none;
     background: none;
     text-transform: uppercase;
     font-size: 1.2em;
-    padding: 1em .5em;
+    padding: 1em 0.5em;
     cursor: pointer;
 }
 nav .category.active {
-    border-bottom: 2px solid #5ECE7B;
-    color: #5ECE7B;
+    border-bottom: 2px solid #5ece7b;
+    color: #5ece7b;
 }
 
 /* dropdowns */
@@ -41,15 +41,15 @@ nav .currency-icon {
     background: none;
     border: 0;
     width: max-content;
-    margin: 0 .5em;
+    margin: 0 0.5em;
     cursor: pointer;
 }
 
 nav .currency-drop-icon {
     display: inline-block;
-    padding: .5em;
-    font-size: .6em;
-    transition: all .5s ease-in-out;
+    padding: 0.5em;
+    font-size: 0.6em;
+    transition: all 0.5s ease-in-out;
 }
 
 nav .currency-dropdown {
@@ -60,19 +60,19 @@ nav .currency-dropdown {
     left: 0%;
     width: max-content;
     padding: 0;
-    box-shadow: 0px 0px 10px #A8ACB0;
+    box-shadow: 0px 0px 10px #a8acb0;
 }
 
-nav .currency-dropdown button{
+nav .currency-dropdown button {
     border: none;
     background-color: #fff;
     font-size: 1em;
-    padding: .5em 1.5em;
+    padding: 0.5em 1.5em;
     width: 100%;
 }
 
-nav .currency-dropdown button:hover{
-    background-color: #EEEEEE;
+nav .currency-dropdown button:hover {
+    background-color: #eeeeee;
 }
 
 /* cart */
@@ -87,7 +87,7 @@ nav .cart-count {
     right: 10%;
     border-radius: 50%;
     border: none;
-    background-color: #1D1F22;
+    background-color: #1d1f22;
     color: #fff;
 }
 

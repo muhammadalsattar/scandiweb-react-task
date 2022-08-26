@@ -1,21 +1,21 @@
-const setProducts = (products) => {
+const setProducts = products => {
     return {
         type: 'SET_PRODUCTS',
-        products
-    }
-}
-const setActiveProduct = (product) => {
+        products,
+    };
+};
+const setActiveProduct = product => {
     return {
         type: 'SET_ACTIVE_PRODUCT',
-        product
-    }
-}
+        product,
+    };
+};
 
-const setLoadedProducts = (loadedProducts) => {
+const setLoadedProducts = loadedProducts => {
     return {
         type: 'SET_LOADED_PRODUCTS',
-        loadedProducts
-    }
-}
+        loadedProducts,
+    };
+};
 
 export { setProducts, setActiveProduct, setLoadedProducts };

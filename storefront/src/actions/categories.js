@@ -1,14 +1,14 @@
-const setCategories = (categories) => {
+const setCategories = categories => {
     return {
         type: 'SET_CATEGORIES',
-        categories
-    }
-}
-const setDefaultCategory = (category) => {
+        categories,
+    };
+};
+const setDefaultCategory = category => {
     return {
         type: 'SET_DEFAULT_CATEGORY',
-        category
-    }
-}
+        category,
+    };
+};
 
 export { setCategories, setDefaultCategory };

@@ -1,10 +1,10 @@
-const setCurrencies = (currencies) => ({
+const setCurrencies = currencies => ({
     type: 'SET_CURRENCIES',
-    currencies
+    currencies,
 });
-const setDefaultCurrency = (currency) => ({
+const setDefaultCurrency = currency => ({
     type: 'SET_DEFAULT_CURRENCY',
-    currency
+    currency,
 });
 
 export { setCurrencies, setDefaultCurrency };

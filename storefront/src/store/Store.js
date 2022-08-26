@@ -1,4 +1,4 @@
-import {configureStore, combineReducers} from '@reduxjs/toolkit';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import cartReducer from '../reducers/cartReducer';
 import productsReducer from '../reducers/productsReducer';
 import categoriesReducer from '../reducers/categoriesReducer';
@@ -8,11 +8,11 @@ const rootReducer = combineReducers({
     cart: cartReducer,
     products: productsReducer,
     categories: categoriesReducer,
-    currencies: currencyReducer
+    currencies: currencyReducer,
 });
 // creating store and combining reducers
 const Store = configureStore({
-    reducer: rootReducer
-})
+    reducer: rootReducer,
+});
 
 export default Store;

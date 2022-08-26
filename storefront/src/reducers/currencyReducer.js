@@ -1,6 +1,6 @@
 const defaultState = {
     currencies: [],
-    defaultCurrency: {}
+    defaultCurrency: {},
 };
 
 const currencyReducer = (state = defaultState, action) => {
@@ -8,16 +8,16 @@ const currencyReducer = (state = defaultState, action) => {
         case 'SET_CURRENCIES':
             return {
                 ...state,
-                currencies: action.currencies
-            }
+                currencies: action.currencies,
+            };
         case 'SET_DEFAULT_CURRENCY':
             return {
                 ...state,
-                defaultCurrency: action.currency
-            }
+                defaultCurrency: action.currency,
+            };
         default:
             return state;
     }
-}
+};
 
 export default currencyReducer;

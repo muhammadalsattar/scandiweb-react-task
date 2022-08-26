@@ -1,39 +1,39 @@
-import {gql} from '@apollo/client';
+import { gql } from '@apollo/client';
 
 export const GET_PRODUCTS = gql`
-{
-  categories {
-    name
-    products {
-    id
-    name
-    brand
-    attributes{
-    id
-    name
-    type
-    items{
-        id
-        value
-        displayValue
+    {
+        categories {
+            name
+            products {
+                id
+                name
+                brand
+                attributes {
+                    id
+                    name
+                    type
+                    items {
+                        id
+                        value
+                        displayValue
+                    }
+                }
+                description
+                gallery
+                prices {
+                    amount
+                    currency {
+                        label
+                        symbol
+                    }
+                }
+                category
+                inStock
+            }
+        }
     }
-    }
-    description
-    gallery
-    prices{
-    amount
-    currency{
-        label
-        symbol
-    }
-    }
-    category
-    inStock
-}
-}
-}
-`
-export const GET_PRODUCT = (id) => gql`
+`;
+export const GET_PRODUCT = id => gql`
 {
 product(id: "${id}") {
     id
@@ -62,19 +62,19 @@ product(id: "${id}") {
     inStock
 }
 }
-`
+`;
 export const GET_CATEGORIES = gql`
-{
-categories {
-    name
+    {
+        categories {
+            name
+        }
     }
-}
-`
+`;
 export const GET_CURRNCIES = gql`
-{
-currencies {
-    label
-    symbol
-}
-}
-`
+    {
+        currencies {
+            label
+            symbol
+        }
+    }
+`;
