@@ -2,7 +2,7 @@ import Store from "../store/Store";
 import { setLoadedProducts } from "../actions/products";
 
 const pickPrice = (prices, defaultCurrency) => {
-    return prices.find(price => price.currency.symbol === defaultCurrency.symbol)?.amount;
+    return prices.find(price => price.currency.symbol === defaultCurrency.symbol)?.amount.toFixed(2);
 }
 
 const calculateTotal = (cart, defaultCurrency) => {
@@ -10,7 +10,7 @@ const calculateTotal = (cart, defaultCurrency) => {
     cart.forEach(product => {
         total += pickPrice(product.prices, defaultCurrency) * product.quantity;
     })
-    return Math.round((total + Number.EPSILON) * 100) / 100;
+    return total.toFixed(2);
 }
 
 const loadProducts = (products, loadedProducts) => {

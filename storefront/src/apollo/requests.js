@@ -1,12 +1,12 @@
 import client from './client';
 import { GET_PRODUCTS, GET_PRODUCT, GET_CATEGORIES, GET_CURRNCIES } from './queries';
 
-export const getProductsByCategory = async (name) => {
+export const getProductsByCategory = async (title) => {
     try {
         const {data} = await client.query({
-            query: GET_PRODUCTS
+            query: GET_PRODUCTS(title)
         })
-        return data.categories.find(category => category.name === name).products;
+        return data.category.products;
     } catch (error) {
         console.log(error);
     }

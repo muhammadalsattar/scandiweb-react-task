@@ -5,6 +5,7 @@ import {addToCart} from "../actions/cart";
 import { getProduct } from "../apollo/requests";
 import Store from "../store/Store";
 import { setActiveProduct } from "../actions/products";
+import { pickPrice } from "../utils/utils";
 
 
 export class Product extends React.Component {
@@ -102,10 +103,7 @@ export class Product extends React.Component {
             </div>
             <div className="product-price">
               <h4>Price:</h4>
-              <h4 className="price">
-              {this.props.product?.prices.find(({currency: {symbol}}) => symbol === this.props.defaultCurrency.symbol)?.currency.symbol}
-              {this.props.product?.prices.find(({currency: {symbol}}) => symbol === this.props.defaultCurrency.symbol)?.amount}
-              </h4>
+              <h4 className="price">{this.props.defaultCurrency.symbol}{pickPrice(this.props.product?.prices, this.props.defaultCurrency)}</h4>
             </div>
             <button className="cart" disabled={!this.props.product?.inStock} onClick={(e)=>{this.addToCart(this.props.product)}}>Add to Cart</button>
             <div className="product-description"></div>

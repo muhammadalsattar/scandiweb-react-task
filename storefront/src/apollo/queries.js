@@ -1,8 +1,8 @@
 import {gql} from '@apollo/client';
 
-export const GET_PRODUCTS = gql`
+export const GET_PRODUCTS = (title) => gql`
 {
-  categories {
+  category (input: {title: "${title}"}) {
     name
     products {
     id
